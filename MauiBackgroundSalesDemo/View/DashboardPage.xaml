@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiBackgroundSalesDemo.Views.DashboardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Dashboard">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+            <Label Text="Sales Dashboard" FontSize="28" FontAttributes="Bold" />
+
+            <Grid ColumnDefinitions="2*,1.5*,2*,2*" ColumnSpacing="8" RowDefinitions="Auto">
+                <Border Grid.Column="0" Padding="10" StrokeThickness="1" StrokeShape="RoundRectangle 12">
+                    <VerticalStackLayout>
+                        <Label Text="Revenue" FontSize="12" TextColor="Gray" />
+                        <Label Text="{Binding TotalRevenue, StringFormat='{0:C}'}" FontSize="14" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Column="1" Padding="10" StrokeThickness="1" StrokeShape="RoundRectangle 12">
+                    <VerticalStackLayout>
+                        <Label Text="Trans" FontSize="12" TextColor="Gray" />
+                        <Label Text="{Binding TotalTransactions}" FontSize="18" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Column="2" Padding="10" StrokeThickness="1" StrokeShape="RoundRectangle 12">
+                    <VerticalStackLayout>
+                        <Label Text="Avg Sale" FontSize="12" TextColor="Gray" />
+                        <Label Text="{Binding AverageSale, StringFormat='{0:C}'}" FontSize="14" FontAttributes="Bold" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Grid.Column="3" Padding="10" StrokeThickness="1" StrokeShape="RoundRectangle 12">
+                    <VerticalStackLayout>
+                        <Label Text="Top Prod" FontSize="12" TextColor="Gray" />
+                        <Label Text="{Binding TopProduct}" FontSize="16" FontAttributes="Bold" LineBreakMode="TailTruncation" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <Label Text="Daily revenue trend" FontSize="18" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding DailySales}" HeightRequest="180">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="56,*,70" Padding="0,4">
+                            <Label Text="{Binding DateLabel}" FontSize="12" VerticalTextAlignment="Center" />
+                            <ProgressBar Grid.Column="1" Progress="{Binding RelativeVolume}" ProgressColor="#5B7CFA" />
+                            <Label Grid.Column="2" Text="{Binding RevenueDisplay}" FontSize="12" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Top products" FontSize="18" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding ProductSales}" HeightRequest="200">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="95,*,70" Padding="0,4">
+                            <Label Text="{Binding Product}" FontSize="12" LineBreakMode="TailTruncation" />
+                            <ProgressBar Grid.Column="1" Progress="{Binding RelativeVolume}" ProgressColor="#2DB56C" />
+                            <Label Grid.Column="2" Text="{Binding RevenueDisplay}" FontSize="12" HorizontalTextAlignment="End" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="Category totals" FontSize="18" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding CategorySales}" HeightRequest="180">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="110,*,70" Padding="0,4">
+                            <Label Text="{Binding Category}" FontSize="12" LineBreakMode="TailTruncation" />
+                            <ProgressBar Grid.Column="1" Progress="{Binding RelativeVolume}" ProgressColor="#F0A500" />
+                            <Label Grid.Column="2" Text="{Binding RevenueDisplay}" FontSize="12" HorizontalTextAlignment="End" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
